@@ -144,7 +144,45 @@ async def help_command(client: Client, message: Message, disable_web_page_previe
 async def help_command(client: Client, message: Message, disable_web_page_preview=True):
     id = message.from_user.id
     
+    if len(m.command) == 1:
+        await m.reply_text(
+            f"Use this command to ban any user from the bot.\n\n"
+            f"Usage:\n\n"
+            f"`/ban_user user_id ban_duration ban_reason`\n\n"
+            f"Eg: `/ban_user 1234567 28 You misused me.`\n"
+            f"This will ban user with id `1234567` for `28` days for the reason `You misused me`.",
+            quote=True
+        )
+        return
 
+    try:
+        user_id = int(m.command[1])
+        ban_duration = int(m.command[2])
+        ban_reason = ' '.join(m.command[3:])
+        ban_log_text = f"Banning user {user_id} for {ban_duration} days for the reason {ban_reason}."
+        try:
+            await c.send_message(
+                user_id,
+                f"You are banned to use this bot for **{ban_duration}** day(s) for the reason __{ban_reason}__ \n\n"
+                f"**Message from the admin**"
+            )
+            ban_log_text += '\n\nUser notified successfully!'
+        except:
+            traceback.print_exc()
+            ban_log_text += f"\n\nUser notification failed! \n\n`{traceback.format_exc()}`"
+
+        await db.ban_user(user_id, ban_duration, ban_reason)
+        print(ban_log_text)
+        await m.reply_text(
+            ban_log_text,
+            quote=True
+        )
+    except:
+        traceback.print_exc()
+        await m.reply_text(
+            f"Error occoured! Traceback given below\n\n`{traceback.format_exc()}`",
+            quote=True
+        )
 
     
     
