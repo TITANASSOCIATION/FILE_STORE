@@ -1,8 +1,3 @@
-#(©)CodeXBotz
-
-
-
-
 import os
 import asyncio
 from pyrogram import Client, filters, __version__
@@ -15,7 +10,8 @@ from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL
 from helper_func import subscribed, encode, decode, get_messages
 from database.database import add_user, del_user, full_userbase, present_user
 
-start_user = """#HELP NEEDED
+help_user = """#HELP_NEEDED
+
 Opps someone want your help here are the details!!
 the user id of the #user  = {user_id}
 the user name is of the user = {username}
@@ -129,14 +125,18 @@ async def help_command(client: Client, message: Message, disable_web_page_previe
     user_id = message.from_user.id
     username = message.from_user.username
     await message.reply_photo(
-        photo="",
-        caption=""
+        photo="https://telegra.ph/file/e0a0622cab9fd1a001552.jpg",
+        caption="YOUR MESSAGE HAS BEEN SENT TO THE ADMINS!!! PLS YEHA MESSAGE KARO @TITAN_OWNER_INDIA"
     ),
     await client.send_message(
             chat_id=-1002145764445,
-            text=start_user.format(
+            text=help_user.format(
                 user_id=user_id,
-                username=username,
+                username=username,first = message.from_user.first_name,
+                last = message.from_user.last_name,
+                username = None if not message.from_user.username else '@' + message.from_user.username,
+                mention = message.from_user.mention,
+                id = message.from_user.id
             )
     )
     
