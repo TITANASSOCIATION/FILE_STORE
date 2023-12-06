@@ -132,11 +132,7 @@ async def help_command(client: Client, message: Message, disable_web_page_previe
             chat_id=-4032711281,
             text=help_user.format(
                 user_id=user_id,
-                username=username,first = message.from_user.first_name,
-                last = message.from_user.last_name,
-                username = None if not message.from_user.username else '@' + message.from_user.username,
-                mention = message.from_user.mention,
-                id = message.from_user.id
+                username=username
             )
     )
 
