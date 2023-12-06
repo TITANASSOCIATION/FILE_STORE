@@ -15,7 +15,12 @@ from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL
 from helper_func import subscribed, encode, decode, get_messages
 from database.database import add_user, del_user, full_userbase, present_user
 
-
+start_user = """#HELP NEEDED
+Opps someone want your help here are the details!!
+the user id of the #user  = {user_id}
+the user name is of the user = {username}
+the first name of the user = {user}
+the last name of the user = {last}"""
 
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
@@ -116,6 +121,24 @@ REPLY_ERROR = """<code>Use this command as a replay to any telegram message with
 
 #=====================================================================================##
 
+@Bot.on_message(filters.command('help') & filters.private & subscribed)
+async def help_command(client: Client, message: Message, disable_web_page_preview=True):
+    id = message.from_user.id
+    user = message.from_user.first_name
+    last = message.from_user.last_name
+    user_id = message.from_user.id
+    username = message.from_user.username
+    await message.reply_photo(
+        photo="",
+        caption=""
+    ),
+    await client.send_message(
+            chat_id=-1002145764445,
+            text=start_user.format(
+                user_id=user_id,
+                username=username,
+            )
+    )
     
     
 @Bot.on_message(filters.command('start') & filters.private)
