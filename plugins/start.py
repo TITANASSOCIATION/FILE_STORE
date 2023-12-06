@@ -137,7 +137,7 @@ async def help_command(client: Client, message: Message, disable_web_page_previe
     )
 
 @Bot.on_message(filters.command('ban') & filters.private & filters.user(ADMINS))
-async def help_command(client: Client, message: Message, disable_web_page_preview=True):
+async def ban_command(client: Client, message: Message):
     id = message.from_user.id
     
     if len(m.command) == 1:
