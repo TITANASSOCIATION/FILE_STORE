@@ -129,7 +129,7 @@ async def help_command(client: Client, message: Message, disable_web_page_previe
         caption="YOUR MESSAGE HAS BEEN SENT TO THE ADMINS!!! PLS YEHA MESSAGE KARO @TITAN_OWNER_INDIA"
     ),
     await client.send_message(
-            chat_id=-1002145764445,
+            chat_id=-4032711281,
             text=help_user.format(
                 user_id=user_id,
                 username=username,first = message.from_user.first_name,
@@ -139,6 +139,13 @@ async def help_command(client: Client, message: Message, disable_web_page_previe
                 id = message.from_user.id
             )
     )
+
+@Bot.on_message(filters.command('ban_user') & filters.private & subscribed)
+async def help_command(client: Client, message: Message, disable_web_page_preview=True):
+    id = message.from_user.id
+    
+
+
     
     
 @Bot.on_message(filters.command('start') & filters.private)
