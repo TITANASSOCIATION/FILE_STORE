@@ -18,6 +18,36 @@ the user name is of the user = {username}
 the first name of the user = {user}
 the last name of the user = {last}"""
 
+@Bot.on_callback_query()
+async def cb_handler(client: Bot, query: CallbackQuery):
+    data = query.data
+    if data == "hey":
+        await query.message.edit_photo(
+            photo="https://telegra.ph/file/e0a0622cab9fd1a001552.jpg",
+            caption="hey",
+            reply_markup = InlineKeyboardMarkup(
+                 [
+                    [
+                        InlineKeyboardButton("🔒 Close", callback_data = "close")
+                    ]
+                ]
+            )
+        )
+    elif data == "lol":
+         await query.message.edit_photo(
+            photo="https://telegra.ph/file/e0a0622cab9fd1a001552.jpg",
+            caption="lund",
+            reply_markup = InlineKeyboardMarkup(
+                 [
+                    [
+                        InlineKeyboardButton("🔒 Close", callback_data = "close")
+                    ]
+                ]
+            )
+        )
+        
+        
+
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
 async def start_command(client: Client, message: Message):
@@ -110,8 +140,8 @@ async def start_command(client: Client, message: Message):
         reply_markup = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("😊 About Me", callback_data = "premium"),
-                    InlineKeyboardButton("🔒 Close", callback_data = "close")
+                    InlineKeyboardButton("😊 About Me", callback_data = "hey"),
+                    InlineKeyboardButton("🔒 Close", callback_data = "lol")
                 ]
             ]
         )
