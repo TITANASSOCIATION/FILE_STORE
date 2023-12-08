@@ -5,6 +5,8 @@ from bot import Bot
 from config import OWNER_ID
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
+UPGRADE = "HERE ARE THE PREMIUM PLANS"
+
 PREMIUM1 = """⭐ TITAN COMMUNITY ⭐
 
 💎 PREMIUM 1
