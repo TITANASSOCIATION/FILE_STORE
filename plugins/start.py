@@ -150,7 +150,7 @@ async def help_command(client: Client, message: Message, disable_web_page_previe
         caption="YOUR MESSAGE HAS BEEN SENT TO THE ADMINS!!! PLS YEHA MESSAGE KARO @TITAN_OWNER_INDIA"
     ),
     await client.send_message(
-            chat_id=-4032711281,
+            chat_id=-1001919036915,
             text=help_text.format(
                 user_id=user_id,
                 username=username
