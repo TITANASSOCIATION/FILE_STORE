@@ -54,14 +54,30 @@ async def start_command(client: Client, message: Message):
         elif len(argument) == 2:
             try:
                 ids = [int(int(argument[1]) / abs(client.db_channel.id))]
-            except:
-                return
-        temp_msg = await message.reply("Please wait...")
-        try:
-            messages = await get_messages(client, ids)
         except:
             await message.reply_text("Something went wrong..!")
             return
+        await temp_msg.edit_text("[■□□□□□□□□□] 10%")
+        await asyncio.sleep(1)
+        await temp_msg.edit_text("[■■□□□□□□□□] 20%")
+        await asyncio.sleep(1)
+        await temp_msg.edit_text("[■■■□□□□□□□] 30%")
+        await asyncio.sleep(1)
+        await temp_msg.edit_text("[■■■■□□□□□□] 40%")
+        await asyncio.sleep(1)
+        await temp_msg.edit_text("[■■■■■□□□□□] 50%")
+        await asyncio.sleep(1)
+        await temp_msg.edit_text("[■■■■■■□□□□] 60%")
+        await asyncio.sleep(1)
+        await temp_msg.edit_text("[■■■■■■■□□□] 70%")
+        await asyncio.sleep(1)
+        await temp_msg.edit_text("[■■■■■■■■□□] 80%")
+        await asyncio.sleep(1)
+        await temp_msg.edit_text("[■■■■■■■■■□] 90%")
+        await asyncio.sleep(1)
+        await temp_msg.edit_text("[■■■■■■■■■■] 100%")
+        await asyncio.sleep(3)
+        await temp_msg.edit_text("ッ Wait thanks for choosing srm ❤️‍🩹")
         await temp_msg.delete()
 
         for msg in messages:
