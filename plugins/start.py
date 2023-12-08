@@ -26,11 +26,16 @@ PICS = [
     "https://telegra.ph/file/5553dc39f968b364d4856.jpg",
 ]
 
-
+BANNED_USERS = {6409842915}
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
 async def start_command(client: Client, message: Message):
     id = message.from_user.id
+
+    if id in BANNED_USERS:
+        await message.reply_text("Sorry, you are banned.")
+        return
+        
     if not await present_user(id):
         try:
             await add_user(id)
@@ -150,6 +155,11 @@ REPLY_ERROR = """<code>Use this command as a replay to any telegram message with
 @Bot.on_message(filters.command('help') & filters.private & subscribed)
 async def help_command(client: Client, message: Message):
     id = message.from_user.id
+
+    if id in BANNED_USERS:
+        await message.reply_text("Sorry, you are banned.")
+        return
+        
     user = message.from_user.first_name
     last = message.from_user.last_name
     user_id = message.from_user.id
@@ -169,6 +179,11 @@ async def help_command(client: Client, message: Message):
 @Bot.on_message(filters.command('upgrade') & filters.private & subscribed)
 async def up_command(client: Client, message: Message):
     id = message.from_user.id
+
+    if id in BANNED_USERS:
+        await message.reply_text("Sorry, you are banned.")
+        return
+        
     await message.reply_photo(
         photo="https://telegra.ph/file/e0a0622cab9fd1a001552.jpg",
         caption="OH HEY WANNNA JOIN PREMIUM CLICK THE BELOW BUTTON TO SEE",
@@ -182,6 +197,11 @@ async def up_command(client: Client, message: Message):
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
+
+    if id in BANNED_USERS:
+        await message.reply_text("Sorry, you are banned.")
+        return
+        
     buttons = [
         [
             InlineKeyboardButton(
