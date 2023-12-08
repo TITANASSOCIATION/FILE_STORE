@@ -287,6 +287,6 @@ Unsuccessful: <code>{unsuccessful}</code></b>"""
         await msg.delete()
 
 @Bot.on_message(filters.command('restart') & filters.private & filters.user(ADMINS))
-async def stop_button(bot, message):
+async def send_text(client: Bot, message: Message):
     await bot.send_message(message.chat.id, "Restarting...")
     os.system("heroku restart -a filestoretitantestindia")
