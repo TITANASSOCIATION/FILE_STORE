@@ -18,6 +18,15 @@ the user name is of the user = {username}
 the first name of the user = {user}
 the last name of the user = {last}"""
 
+PICS = [
+    "https://telegra.ph/file/5553dc39f968b364d4856.jpg",
+    "https://telegra.ph/file/5553dc39f968b364d4856.jpg",
+    "https://telegra.ph/file/5553dc39f968b364d4856.jpg",
+    "https://telegra.ph/file/5553dc39f968b364d4856.jpg",
+]
+
+
+
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
 async def start_command(client: Client, message: Message):
     id = message.from_user.id
@@ -114,8 +123,9 @@ async def start_command(client: Client, message: Message):
                 ]
             ]
         )
-        await message.reply_text(
-            text = START_MSG.format(
+        await message.reply_photo(
+            photo=random.choice(PICS),
+            caption = START_MSG.format(
                 first = message.from_user.first_name,
                 last = message.from_user.last_name,
                 username = None if not message.from_user.username else '@' + message.from_user.username,
