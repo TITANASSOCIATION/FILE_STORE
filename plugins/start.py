@@ -54,6 +54,11 @@ async def start_command(client: Client, message: Message):
         elif len(argument) == 2:
             try:
                 ids = [int(int(argument[1]) / abs(client.db_channel.id))]
+            except:
+                return
+        temp_msg = await message.reply("Please wait...")
+        try:
+            messages = await get_messages(client, ids)
         except:
             await message.reply_text("Something went wrong..!")
             return
@@ -79,7 +84,7 @@ async def start_command(client: Client, message: Message):
         await asyncio.sleep(3)
         await temp_msg.edit_text("ッ Wait thanks for choosing srm ❤️‍🩹")
         await temp_msg.delete()
-
+    
         for msg in messages:
 
             if bool(CUSTOM_CAPTION) & bool(msg.document):
