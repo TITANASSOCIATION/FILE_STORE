@@ -72,6 +72,15 @@ PREMIUM4 = """⭐ TITAN COMMUNITY ⭐
 ───────────────
 Wannna buy this? sure click on buy now"""
 
+ABOUT_TXT = """<b>○ 𝖬𝗒 𝖭𝖺𝗆𝖾: {}
+○ 𝖢𝗋𝖾𝖺𝗍𝗈𝗋 : <a href='https://t.me/piroxbots'>𝖳𝗁𝗂𝗌 𝖯𝖾𝗋𝗌𝗈𝗇</a>
+○ 𝖫𝖺𝗇𝗀𝗎𝖺𝗀𝖾 : 𝖯𝗒𝗍𝗁𝗈𝗇 𝟥 
+○ 𝖫𝗂𝖻𝗋𝖺𝗋𝗒 : 𝖯𝗒𝗋𝗈𝗀𝗋𝖺𝗆 𝖺𝗌𝗒𝗇𝖼𝗂𝗈 𝟢.𝟣𝟩.𝟣 
+○ 𝖲𝖾𝗋𝗏𝖾𝗋 : Contabo
+○ 𝖣𝖺𝗍𝖺𝖻𝖺𝗌𝖾 : <a href='https://www.mongodb.com'>𝖬𝗈𝗇𝗀𝗈𝖣𝖡 𝖥𝗋𝖾𝖾 𝖳𝗂𝖾𝗋</a>
+○ 𝖡𝗎𝗂𝗅𝖽 𝖲𝗍𝖺𝗍𝗎𝗌 : v1.0.1 [BeTa]
+○ 𝖲𝗎𝗉𝗉𝗈𝗋𝗍 𝖦𝗋𝗈𝗎𝗉 : <a href='https://t.me/raixchat'>𝖳𝖺𝗉 𝖧𝖾𝗋𝖾</a>"""
+
 
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
@@ -100,7 +109,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     InlineKeyboardButton('PREMIUM 4', callback_data='premium4')
                 ],
                 [
-	            InlineKeyboardButton('⛔ CLOSE ⛔', callback_data='close')
+	            InlineKeyboardButton('⛔ CLOSE ⛔', callback_data='start')
                 ]
 					      
             ])
@@ -160,7 +169,39 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 ]
 					      
             ])
-        )		    
+	)
+    elif data == "about":
+        await query.message.edit_text(
+            text=ABOUT_TXT,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup([
+                [
+                    InlineKeyboardButton('⛔ BACK ⛔', callback_data='start')
+		]	      
+            ])
+        )
+    elif data == "start":
+        await query.message.edit_text(
+	    text = START_MSG.format(
+                first = message.from_user.first_name,
+                last = message.from_user.last_name,
+                username = None if not message.from_user.username else '@' + message.from_user.username,
+                mention = message.from_user.mention,
+                id = message.from_user.id
+	    )
+	    disable_web_page_preview=True,
+	    reply_markup = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("𝚄𝙿𝙳𝙰𝚃𝙴𝚂", url = "https://t.me/Titan_Association"),
+                    InlineKeyboardButton("𝙰𝙱𝙾𝚄𝚃", callback_data = "about")
+                ],
+                [
+                    InlineKeyboardButton("𝙱𝚄𝚈 𝙿𝚁𝙴𝙼𝙸𝚄𝙼 𝙽𝙾𝚆 !!!", callback_data = "premium")
+                ]   
+            ]
+        	
+		
     elif data == "close":
         await query.message.delete()
         try:
