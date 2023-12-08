@@ -171,13 +171,14 @@ async def up_command(client: Client, message: Message):
     id = message.from_user.id
     await message.reply_photo(
         photo="https://telegra.ph/file/e0a0622cab9fd1a001552.jpg",
-        caption"OH HEY WANNNA JOIN PREMIUM CLICK THE BELOW BUUTON TO SEE",
+        caption="OH HEY WANNNA JOIN PREMIUM CLICK THE BELOW BUTTON TO SEE",
         reply_markup=InlineKeyboardMarkup(
-                [
-                    [InlineKeyboardButton("⚡SEE THE PLANS HERE⚡", callback_data="premium")]
-                ]
-            )
+            [
+                [InlineKeyboardButton("⚡SEE THE PLANS HERE⚡", callback_data="premium")]
+            ]
         )
+    )
+
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
