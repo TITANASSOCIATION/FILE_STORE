@@ -121,13 +121,17 @@ async def start_command(client: Client, message: Message):
                 pass
         return
     else:
-        reply_markup = InlineKeyboardMarkup(
-            [
+        reply_markup=InlineKeyboardMarkup(
                 [
-                    InlineKeyboardButton("😊 About Me", callback_data = "premium"),
-                    InlineKeyboardButton("🔒 Close", callback_data = "lol")
+                    [
+                        InlineKeyboardButton("𝚄𝙿𝙳𝙰𝚃𝙴𝚂", url="https://t.me/Titan_Association"),
+                        InlineKeyboardButton("𝙰𝙱𝙾𝚄𝚃", callback_data="about")
+                    ],
+                    [
+                        InlineKeyboardButton("𝙱𝚄𝚈 𝙿𝚁𝙴𝙼𝙸𝚄𝙼 𝙽𝙾𝚆 !!!", callback_data="premium")
+                    ]
                 ]
-            ]
+            )
         )
         await message.reply_photo(
             photo=random.choice(PICS),
@@ -165,7 +169,7 @@ async def help_command(client: Client, message: Message):
     user_id = message.from_user.id
     username = message.from_user.username
     await message.reply_photo(
-        photo="https://telegra.ph/file/e0a0622cab9fd1a001552.jpg",
+        photo=random.choice(PICS),
         caption="YOUR MESSAGE HAS BEEN SENT TO THE ADMINS!!! PLS YEHA MESSAGE KARO @TITAN_OWNER_INDIA"
     ),
     await client.send_message(
@@ -185,7 +189,7 @@ async def up_command(client: Client, message: Message):
         return
         
     await message.reply_photo(
-        photo="https://telegra.ph/file/e0a0622cab9fd1a001552.jpg",
+        photo=random.choice(PICS),
         caption="OH HEY WANNNA JOIN PREMIUM CLICK THE BELOW BUTTON TO SEE",
         reply_markup=InlineKeyboardMarkup(
             [
