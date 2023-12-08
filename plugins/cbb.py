@@ -1,6 +1,5 @@
 #(©)Codexbotz
 
-import txt
 from pyrogram import __version__
 from bot import Bot
 from config import OWNER_ID
@@ -46,7 +45,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
         )
     elif data == "premium":
         await query.message.edit_text(
-            text=txt.UPGRADE,
+            text=UPGRADE,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([
                 InlineKeyboardButton("👨‍💻 Dᴇᴠꜱ 👨‍💻", callback_data='dev')
