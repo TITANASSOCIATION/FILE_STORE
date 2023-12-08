@@ -20,10 +20,10 @@ the first name of the user = {user}
 the last name of the user = {last}"""
 
 PICS = [
-    "https://telegra.ph/file/5553dc39f968b364d4856.jpg",
-    "https://telegra.ph/file/5553dc39f968b364d4856.jpg",
-    "https://telegra.ph/file/5553dc39f968b364d4856.jpg",
-    "https://telegra.ph/file/5553dc39f968b364d4856.jpg",
+    "https://telegra.ph/file/057d2ac31007228da3b8d.jpg",
+    "https://telegra.ph/file/68576f8c8f3b4b9192348.jpg",
+    "https://telegra.ph/file/39b11b9b63d2a4973f923.jpg",
+    "https://telegra.ph/file/70573a3245aa860bf5fcc.jpg",
 ]
 
 BANNED_USERS = {6409842915}
@@ -178,25 +178,6 @@ async def help_command(client: Client, message: Message):
                 username=username
             )
     )
-
-@Bot.on_message(filters.command('upgrade') & filters.private & subscribed)
-async def up_command(client: Client, message: Message):
-    id = message.from_user.id
-
-    if id in BANNED_USERS:
-        await message.reply_text("Sorry, you are banned.")
-        return
-        
-    await message.reply_photo(
-        photo=random.choice(PICS),
-        caption="OH HEY WANNNA JOIN PREMIUM CLICK THE BELOW BUTTON TO SEE",
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton("⚡SEE THE PLANS HERE⚡", callback_data="premium")]
-            ]
-        )
-    )
-
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
