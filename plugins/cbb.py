@@ -181,16 +181,16 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             ])
         )
     elif data == "start":
-        await query.message.edit_text(
-	    text = START_MSG.format(
-                first = message.from_user.first_name,
-                last = message.from_user.last_name,
-                username = None if not message.from_user.username else '@' + message.from_user.username,
-                mention = message.from_user.mention,
-                id = message.from_user.id
-	    )
-	    disable_web_page_preview=True,
-	    reply_markup = InlineKeyboardMarkup(
+    await query.message.edit_text(
+        text = START_MSG.format(
+            first = message.from_user.first_name,
+            last = message.from_user.last_name,
+            username = None if not message.from_user.username else '@' + message.from_user.username,
+            mention = message.from_user.mention,
+            id = message.from_user.id
+        ),
+        disable_web_page_preview = True,
+        reply_markup = InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton("𝚄𝙿𝙳𝙰𝚃𝙴𝚂", url = "https://t.me/Titan_Association"),
@@ -200,11 +200,11 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     InlineKeyboardButton("𝙱𝚄𝚈 𝙿𝚁𝙴𝙼𝙸𝚄𝙼 𝙽𝙾𝚆 !!!", callback_data = "premium")
                 ]   
             ]
-        	
-		
-    elif data == "close":
-        await query.message.delete()
-        try:
-            await query.message.reply_to_message.delete()
-        except:
-            pass
+        )
+    )
+elif data == "close":
+    await query.message.delete()
+    try:
+        await query.message.reply_to_message.delete()
+    except:
+        pass
