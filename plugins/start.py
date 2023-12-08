@@ -131,7 +131,6 @@ async def start_command(client: Client, message: Message):
                         InlineKeyboardButton("𝙱𝚄𝚈 𝙿𝚁𝙴𝙼𝙸𝚄𝙼 𝙽𝙾𝚆 !!!", callback_data="premium")
                     ]
                 ]
-            )
         )
         await message.reply_photo(
             photo=random.choice(PICS),
