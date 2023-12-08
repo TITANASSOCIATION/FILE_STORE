@@ -46,8 +46,8 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             text=UPGRADE,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([
-                InlineKeyboardButton('📯 Uᴩᴅᴀᴛᴇꜱ', url='https://t.me/PYRO_BOTZ'),
-                InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀᴛ', url='https://t.me/PYRO_BOTZ_CHAT')
+                [InlineKeyboardButton('📯 Uᴩᴅᴀᴛᴇꜱ', url='https://t.me/PYRO_BOTZ')],
+                [InlineKeyboardButton('💁‍♂️ Sᴜᴩᴩᴏʀᴛ', url='https://t.me/PYRO_BOTZ_CHAT')]
             ])
         )
     elif data == "close":
