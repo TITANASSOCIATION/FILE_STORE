@@ -1,4 +1,5 @@
 import os
+import random
 import asyncio
 from pyrogram import Client, filters, __version__
 from pyrogram.enums import ParseMode
