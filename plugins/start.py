@@ -10,7 +10,7 @@ from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL
 from helper_func import subscribed, encode, decode, get_messages
 from database.database import add_user, del_user, full_userbase, present_user
 
-help_user = """#HELP_NEEDED
+help_text = """#HELP_NEEDED
 
 Opps someone want your help here are the details!!
 the user id of the #user  = {user_id}
@@ -151,7 +151,7 @@ async def help_command(client: Client, message: Message, disable_web_page_previe
     ),
     await client.send_message(
             chat_id=-4032711281,
-            text=help_user.format(
+            text=help_text.format(
                 user_id=user_id,
                 username=username
             )
