@@ -134,7 +134,6 @@ async def start_command(client: Client, message: Message):
                 id = message.from_user.id
             ),
             reply_markup = reply_markup,
-            disable_web_page_preview = True,
             quote = True
         )
         return
@@ -149,7 +148,7 @@ REPLY_ERROR = """<code>Use this command as a replay to any telegram message with
 #=====================================================================================##
 
 @Bot.on_message(filters.command('help') & filters.private & subscribed)
-async def help_command(client: Client, message: Message, disable_web_page_preview=True):
+async def help_command(client: Client, message: Message):
     id = message.from_user.id
     user = message.from_user.first_name
     last = message.from_user.last_name
@@ -166,6 +165,19 @@ async def help_command(client: Client, message: Message, disable_web_page_previe
                 username=username
             )
     )
+
+@Bot.on_message(filters.command('upgrade') & filters.private & subscribed)
+async def up_command(client: Client, message: Message):
+    id = message.from_user.id
+    await message.reply_photo(
+        photo="https://telegra.ph/file/e0a0622cab9fd1a001552.jpg",
+        caption=UPGRADE,
+        reply_markup=InlineKeyboardMarkup(
+                [
+                    [InlineKeyboardButton("⚡SEE THE PLANS HERE⚡", callback_data="premium")]
+                ]
+            )
+        )
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
