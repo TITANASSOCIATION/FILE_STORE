@@ -48,7 +48,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
         await query.message.edit_text(
             text=txt.UPGRADE,
             disable_web_page_preview=True,
-            reply_markup = InlineKeyboardMarkup([[
+            reply_markup=InlineKeyboardMarkup([
                 InlineKeyboardButton("👨‍💻 Dᴇᴠꜱ 👨‍💻", callback_data='dev')
                 ],[
                 InlineKeyboardButton('📯 Uᴩᴅᴀᴛᴇꜱ', url='https://t.me/PYRO_BOTZ'),
@@ -56,7 +56,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 ],[
                 InlineKeyboardButton('🎛️ Aʙᴏᴜᴛ', callback_data='about'),
                 InlineKeyboardButton('🛠️ Hᴇʟᴩ', callback_data='help')
-            ]])
+            ])
         )
     elif data == "close":
         await query.message.delete()
