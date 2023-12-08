@@ -81,11 +81,10 @@ ABOUT_TXT = """<b>○ 𝖬𝗒 𝖭𝖺𝗆𝖾: {}
 ○ 𝖡𝗎𝗂𝗅𝖽 𝖲𝗍𝖺𝗍𝗎𝗌 : v1.0.1 [BeTa]
 ○ 𝖲𝗎𝗉𝗉𝗈𝗋𝗍 𝖦𝗋𝗈𝗎𝗉 : <a href='https://t.me/raixchat'>𝖳𝖺𝗉 𝖧𝖾𝗋𝖾</a>"""
 
-
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
     data = query.data
-    if data == "about":
+    if data == "hey":
         await query.message.edit_text(
             text=f"<b>○ Creator : <a href='tg://user?id={OWNER_ID}'>This Person</a>\n○ Language : <code>Python3</code>\n○ Library : <a href='https://docs.pyrogram.org/'>Pyrogram asyncio {__version__}</a>\n○ Source Code : <a href='https://github.com/CodeXBotz/File-Sharing-Bot'>Click here</a>\n○ Channel : @CodeXBotz\n○ Support Group : @CodeXBotzSupport</b>",
             disable_web_page_preview=True,
@@ -109,9 +108,8 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     InlineKeyboardButton('PREMIUM 4', callback_data='premium4')
                 ],
                 [
-	            InlineKeyboardButton('⛔ CLOSE ⛔', callback_data='start')
+                    InlineKeyboardButton('⛔ CLOSE ⛔', callback_data='start')
                 ]
-					      
             ])
         )
     elif data == "premium1":
@@ -121,11 +119,10 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup([
                 [
                     InlineKeyboardButton('⛔ BACK TO MENU ⛔', callback_data='premium')
-		],
-		[
-		    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
+                ],
+                [
+                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
                 ]
-					      
             ])
         )
     elif data == "premium2":
@@ -135,11 +132,10 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup([
                 [
                     InlineKeyboardButton('⛔ BACK TO MENU ⛔', callback_data='premium')
-		],
-		[
-		    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
+                ],
+                [
+                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
                 ]
-					      
             ])
         )
     elif data == "premium3":
@@ -149,11 +145,10 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup([
                 [
                     InlineKeyboardButton('⛔ BACK TO MENU ⛔', callback_data='premium')
-		],
-		[
-		    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
+                ],
+                [
+                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
                 ]
-					      
             ])
         )
     elif data == "premium4":
@@ -163,13 +158,12 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup([
                 [
                     InlineKeyboardButton('⛔ BACK TO MENU ⛔', callback_data='premium')
-		],
-		[
-		    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
+                ],
+                [
+                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
                 ]
-					      
             ])
-	)
+        )
     elif data == "about":
         await query.message.edit_text(
             text=ABOUT_TXT,
@@ -177,34 +171,34 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup([
                 [
                     InlineKeyboardButton('⛔ BACK ⛔', callback_data='start')
-		]	      
+                ]
             ])
         )
     elif data == "start":
-	await query.message.edit_text(
-	    text = START_MSG.format(
-		    first = message.from_user.first_name,
-		    last = message.from_user.last_name,
-		    username = None if not message.from_user.username else '@' + message.from_user.username,
-		    mention = message.from_user.mention,
-		    id = message.from_user.id
-	),
-        disable_web_page_preview = True,
-        reply_markup = InlineKeyboardMarkup(
-            [
+        await query.message.edit_text(
+            text=START_MSG.format(
+                first=message.from_user.first_name,
+                last=message.from_user.last_name,
+                username=None if not message.from_user.username else '@' + message.from_user.username,
+                mention=message.from_user.mention,
+                id=message.from_user.id
+            ),
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
                 [
-                    InlineKeyboardButton("𝚄𝙿𝙳𝙰𝚃𝙴𝚂", url = "https://t.me/Titan_Association"),
-                    InlineKeyboardButton("𝙰𝙱𝙾𝚄𝚃", callback_data = "about")
-                ],
-                [
-                    InlineKeyboardButton("𝙱𝚄𝚈 𝙿𝚁𝙴𝙼𝙸𝚄𝙼 𝙽𝙾𝚆 !!!", callback_data = "premium")
-                ]   
-            ]
+                    [
+                        InlineKeyboardButton("𝚄𝙿𝙳𝙰𝚃𝙴𝚂", url="https://t.me/Titan_Association"),
+                        InlineKeyboardButton("𝙰𝙱𝙾𝚄𝚃", callback_data="about")
+                    ],
+                    [
+                        InlineKeyboardButton("𝙱𝚄𝚈 𝙿𝚁𝙴𝙼𝙸𝚄𝙼 𝙽𝙾𝚆 !!!", callback_data="premium")
+                    ]
+                ]
+            )
         )
-    )
-elif data == "close":
-    await query.message.delete()
-    try:
-        await query.message.reply_to_message.delete()
-    except:
-        pass
+    elif data == "close":
+        await query.message.delete()
+        try:
+            await query.message.reply_to_message.delete()
+        except:
+            pass
