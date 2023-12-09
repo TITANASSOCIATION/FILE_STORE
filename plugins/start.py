@@ -26,7 +26,7 @@ PICS = [
     "https://telegra.ph/file/70573a3245aa860bf5fcc.jpg",
 ]
 
-BANNED_USERS = {6409842915}
+BANNED_USERS = {4543422354324}
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
 async def start_command(client: Client, message: Message):
