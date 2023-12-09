@@ -8,6 +8,8 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 
 UPGRADE = "HERE ARE THE PREMIUM PLANS"
 
+PAY = "HEY ABHI AYAY NEHI YE FEATURE STILL IN TESTING SO MESSAGE ME @TITAN_OWNER_INDIA "
+
 PREMIUM1 = """⭐ TITAN COMMUNITY ⭐
 
 💎 PREMIUM 1
@@ -123,7 +125,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     InlineKeyboardButton('⛔ BACK TO MENU ⛔', callback_data='premium')
                 ],
                 [
-                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
+                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='pay')
                 ]
             ])
         )
@@ -136,7 +138,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     InlineKeyboardButton('⛔ BACK TO MENU ⛔', callback_data='premium')
                 ],
                 [
-                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
+                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='pay')
                 ]
             ])
         )
@@ -149,7 +151,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     InlineKeyboardButton('⛔ BACK TO MENU ⛔', callback_data='premium')
                 ],
                 [
-                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
+                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='pay')
                 ]
             ])
         )
@@ -162,7 +164,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     InlineKeyboardButton('⛔ BACK TO MENU ⛔', callback_data='premium')
                 ],
                 [
-                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='close')
+                    InlineKeyboardButton('⛔ PAY HERE NOW !!! ⛔', callback_data='pay')
                 ]
             ])
         )
@@ -197,6 +199,16 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     ]
                 ]
             )
+        )
+    elif data == "pay":
+        await query.message.edit_text(
+            text=PAY,
+            disable_web_page_preview=False,
+            reply_markup=InlineKeyboardMarkup([
+                [
+                    InlineKeyboardButton('⛔ BACK ⛔', callback_data='premium')
+                ]
+            ])
         )
     elif data == "close":
         await query.message.delete()
