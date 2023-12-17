@@ -214,7 +214,7 @@ async def not_joined(self, message: aiogram_types.Message):
         return
 
     user_id = message.from_user.id
-    is_member_of_all_channels = await check_channel_membership(bot, user_id)
+    is_member_of_all_channels = await check_channel_membership(Bot, user_id)
 
     if not is_member_of_all_channels:
         buttons = [
