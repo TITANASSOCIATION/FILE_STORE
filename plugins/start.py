@@ -180,7 +180,7 @@ async def help_command(client: Client, message: Message):
             )
     )
 
-force_channel = "Titan_Association"
+force_channel = {"Titan_Association", "TITAN_UP_IND"}
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(bot, message):
@@ -197,11 +197,12 @@ async def not_joined(bot, message):
             await message.reply_text(
                 text="Please join the channel",
                 reply_markup=InlineKeyboardMarkup([[
-                    InlineKeyboardButton("Join Channel", url=f"t.me/{force_channel}")
+                    InlineKeyboardButton("Join Channel", url=f"t.me/Titan_Association"),
+                    InlineKeyboardButton("Join Channel", url=f"t.me/TITAN_UP_IND")
                     ]]
                    )
-            )         
-    
+            )
+ 
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
     msg = await client.send_message(chat_id=message.chat.id, text=WAIT_MSG)
