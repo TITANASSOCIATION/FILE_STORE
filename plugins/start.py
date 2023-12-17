@@ -190,7 +190,7 @@ channel_ids = ["-1001919036915", "-1002093073712"]
 # Function to check if the user is a member of a channel
 async def is_user_member(client, user_id, channel_id):
     try:
-        member = await client.get_chat_member(channel_id, user_id)
+        member = await client.get_chat_member(chat_id=channel_id, user_id=user_id)
         return member.status in ['member', 'administrator', 'creator']
     except Exception as e:
         print(e)
