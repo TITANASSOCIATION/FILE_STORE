@@ -202,9 +202,11 @@ async def not_joined(bot, message):
                     InlineKeyboardButton("Join Channel", url=f"t.me/Titan_Association")
                 ]])
             )
+            return
+            
     if force1_channel:
         try:
-            user = await bot.get_chat_member(force_channel, message.from_user.id)
+            user = await bot.get_chat_member(force1_channel, message.from_user.id)
             if user.status == "kicked":
                 await message.reply_text("You are banned in this channel.")
                 return
