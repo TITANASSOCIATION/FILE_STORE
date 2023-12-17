@@ -180,7 +180,7 @@ async def help_command(client: Client, message: Message):
             )
     )
 
-force_channel = "titan"
+force_channel = "<link>titan</link>"
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(bot, message):
@@ -190,16 +190,16 @@ async def not_joined(bot, message):
     if force_channel:
         try:
             user = await bot.get_chat_member(force_channel, message.from_user.id)
-            if user.status == "kicked out":
-                await message.reply_text("you are banned here")
+            if user.status == "kicked":
+                await message.reply_text("You are banned in this channel.")
                 return
-    except UserNotParticipant:
-        await message.reply_text(
-            text = "bruh join the channel",
-            reply_markup=InlineKeyboardMarkup([[
-                InlineKeyboardButton(updates channel, url="https://t.me/{force_channel}"
-                                     ]])
-        )
+        except UserNotParticipant:
+            await message.reply_text(
+                text="Please join the channel",
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton("Join Channel", url="https://t.me/" + force_channel)
+                ]])
+            )
     
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
