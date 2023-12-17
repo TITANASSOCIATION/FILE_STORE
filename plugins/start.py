@@ -203,7 +203,7 @@ async def check_channel_membership(client, user_id):
     return True
 
 @Bot.on_message(filters.command('start') & filters.private)
-async def not_joined(message: aiogram_types.Message):
+async def not_joined(_, message: aiogram_types.Message):
     if message.from_user.id in BANNED_USERS:
         await message.reply_text("Sorry, you are banned.")
         return
@@ -241,7 +241,6 @@ async def not_joined(message: aiogram_types.Message):
         )
 
         await message.reply_text(welcome_message, reply_markup=InlineKeyboardMarkup(buttons), quote=True, disable_web_page_preview=True)
-
         
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
