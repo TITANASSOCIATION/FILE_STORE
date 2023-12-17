@@ -5,7 +5,7 @@ from aiogram import types as aiogram_types
 from pyrogram import Client, filters, __version__
 from pyrogram.enums import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
-from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
+from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated, UserNotParticipant
 
 from bot import Bot
 from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
@@ -180,68 +180,28 @@ async def help_command(client: Client, message: Message):
             )
     )
 
-channel1_invite_link = "https://t.me/your_channel1_invite_link"
-channel2_invite_link = "https://t.me/your_channel2_invite_link"
-
-channel_ids = ["-1001919036915", "-1002093073712"]
-
-# Function to check if the user is a member of a channel
-async def is_user_member(client, user_id, channel_id):
-    try:
-        member = await client.get_chat_member(chat_id=channel_id, user_id=user_id)
-        return member.status in ['member', 'administrator', 'creator']
-    except Exception as e:
-        print(e)
-        return False
-
-# Check if the user is a member of all the channels
-async def check_channel_membership(client, user_id):
-    for channel_id in channel_ids:
-        is_member = await is_user_member(client, user_id, channel_id)
-        if not is_member:
-            return False
-    return True
+force_channel = "titan"
 
 @Bot.on_message(filters.command('start') & filters.private)
-async def not_joined(_, message: aiogram_types.Message):
+async def not_joined(bot, message):
     if message.from_user.id in BANNED_USERS:
         await message.reply_text("Sorry, you are banned.")
         return
-
-    user_id = message.from_user.id
-    is_member_of_all_channels = await check_channel_membership(Bot, user_id)
-
-    buttons = [
-        InlineKeyboardButton(
-            "Join Channel 1",
-            url=channel1_invite_link
-        ),
-        InlineKeyboardButton(
-            "Join Channel 2",
-            url=channel2_invite_link
+    if force_channel:
+        try:
+            user = await bot.get_chat_member(force_channel, message.from_user.id)
+            if user.status == "kicked out":
+                await message.reply_text("you are banned here")
+                return
+    except UserNotParticipant:
+        await message.reply_text(
+            text = "bruh join the channel",
+            reply_markup=InlineKeyboardMarkup([[
+                InlineKeyboardButton(updates channel, url="https://t.me/{force_channel}"
+                ]]
+               )
         )
-    ]
-
-    if not is_member_of_all_channels:
-        await message.reply(
-            text="Please join all the required channels to proceed.",
-            reply_markup=InlineKeyboardMarkup([buttons]),
-            quote=True,
-            disable_web_page_preview=True
-        )
-    else:
-        # Replace <link> with actual formatting tags
-        welcome_message = (
-            "You are a member of all required channels. Welcome!\n\n"
-            f"FORCE_MSG: first={message.from_user.first_name}, "
-            f"last={message.from_user.last_name}, "
-            f"username={'@' + message.from_user.username if message.from_user.username else None}, "
-            f"mention={message.from_user.mention}, "
-            f"id={message.from_user.id}"
-        )
-
-        await message.reply_text(welcome_message, reply_markup=InlineKeyboardMarkup(buttons), quote=True, disable_web_page_preview=True)
-        
+    
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
     msg = await client.send_message(chat_id=message.chat.id, text=WAIT_MSG)
