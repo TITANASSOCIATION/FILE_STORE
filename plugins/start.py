@@ -189,6 +189,7 @@ async def not_joined(bot, message):
     if message.from_user.id in BANNED_USERS:
         await message.reply_text("Sorry, you are banned.")
         return
+    
     if force_channel:
         try:
             user = await bot.get_chat_member(force_channel, message.from_user.id)
@@ -202,6 +203,7 @@ async def not_joined(bot, message):
                     InlineKeyboardButton("Join Channel", url=f"t.me/Titan_Association")
                 ]])
             )
+    
     if force1_channel:
         try:
             user = await bot.get_chat_member(force1_channel, message.from_user.id)
@@ -215,7 +217,7 @@ async def not_joined(bot, message):
                     InlineKeyboardButton("Join Channel", url=f"t.me/+94LoRT0VwOdkZTk1")
                 ]])
             )
- 
+
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
     msg = await client.send_message(chat_id=message.chat.id, text=WAIT_MSG)
