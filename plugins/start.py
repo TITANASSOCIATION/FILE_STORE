@@ -96,8 +96,9 @@ async def start_command(client: Client, message: Message):
         await temp_msg.edit_text("[■■■■■■■■■□] 90%")
         await asyncio.sleep(1)
         await temp_msg.edit_text("[■■■■■■■■■■] 100%")
+        await asyncio.sleep(1)
+        await temp_msg.edit_text("ッ Hey wassup we getting your links ready so pls wait ❤️‍🩹")
         await asyncio.sleep(3)
-        await temp_msg.edit_text("ッ Wait thanks for choosing srm ❤️‍🩹")
         await temp_msg.delete()
     
         for msg in messages:
@@ -180,7 +181,7 @@ async def help_command(client: Client, message: Message):
             )
     )
 
-force_channel = {"Titan_Association", "TITAN_UP_IND"}
+force_channel = {"Titan_Association"}
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(bot, message):
@@ -197,8 +198,7 @@ async def not_joined(bot, message):
             await message.reply_text(
                 text="Please join the channel",
                 reply_markup=InlineKeyboardMarkup([[
-                    InlineKeyboardButton("Join Channel", url=f"t.me/Titan_Association"),
-                    InlineKeyboardButton("Join Channel", url=f"t.me/TITAN_UP_IND")
+                    InlineKeyboardButton("Join Channel", url=f"t.me/Titan_Association")
                     ]]
                    )
             )
