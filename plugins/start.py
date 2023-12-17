@@ -185,19 +185,18 @@ channel2_invite_link = "https://t.me/your_channel2_invite_link"
 
 channel_ids = ["-1001919036915", "-1002093073712"]
 
-# Function to check if the user is a member of a channel
-async def is_user_member(client, user_id, channel_id):
+async def is_user_member(self, user_id, channel_id):
     try:
-        member = await client.get_chat_member(chat_id=channel_id, user_id=user_id)
+        member = await self.get_chat_member(chat_id=channel_id, user_id=user_id)
         return member.status in ['member', 'administrator', 'creator']
     except Exception as e:
         print(e)
         return False
 
 # Check if the user is a member of all the channels
-async def check_channel_membership(client, user_id):
+async def check_channel_membership(self, user_id):
     for channel_id in channel_ids:
-        is_member = await is_user_member(client, user_id, channel_id)
+        is_member = await self.is_user_member(user_id, channel_id)
         if not is_member:
             return False
     return True
@@ -241,6 +240,7 @@ async def not_joined(_, message: aiogram_types.Message):
         )
 
         await message.reply_text(welcome_message, reply_markup=InlineKeyboardMarkup(buttons), quote=True, disable_web_page_preview=True)
+
         
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
