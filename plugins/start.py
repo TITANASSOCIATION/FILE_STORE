@@ -182,7 +182,7 @@ async def help_command(client: Client, message: Message):
 
 
 channel1_invite_link = "https://t.me/your_channel1_invite_link"
-channel2_invite_link = "https://t.me/your_channel2_invite_link
+channel2_invite_link = "https://t.me/your_channel2_invite_link"
 
 # Your list of channel IDs
 channel_ids = ["-1001919036915", "-1002093073712"]
