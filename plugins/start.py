@@ -179,7 +179,6 @@ async def help_command(client: Client, message: Message):
             )
     )
 
-List of Channel IDs to check
 channel_ids = ["-1001919036915", "-1002093073712"]
 
 Function to check if the user is a member of a channel
