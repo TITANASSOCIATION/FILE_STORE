@@ -179,45 +179,68 @@ async def help_command(client: Client, message: Message):
             )
     )
 
+List of Channel IDs to check
+channel_ids = ["-1001919036915", "-1002093073712"]
+
+Function to check if the user is a member of a channel
+async def is_user_member(client, user_id, channel_id):
+    try:
+        member = await client.get_chat_member(channel_id, user_id)
+        return member.status in ['member', 'administrator', 'creator']
+    except Exception as e:
+        print(e)
+        return False
+
+Check if the user is a member of all the channels
+async def check_channel_membership(client, user_id):
+    for channel_id in channel_ids:
+        is_member = await is_user_member(client, user_id, channel_id)
+        if not is_member:
+            return False
+    return True
+
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
-
-    if id in BANNED_USERS:
+    if message.from_user.id in BANNED_USERS:
         await message.reply_text("Sorry, you are banned.")
         return
-        
-    buttons = [
-        [
+
+    user_id = message.from_user.id
+    is_member_of_all_channels = await check_channel_membership(client, user_id)
+
+    if not is_member_of_all_channels:
+        buttons = [
             InlineKeyboardButton(
-                "Join Channel",
-                url = client.invitelink)
-        ]
-    ]
-    try:
-        buttons.append(
-            [
-                InlineKeyboardButton(
-                    text = 'Try Again',
-                    url = f"https://t.me/{client.username}?start={message.command[1]}"
-                )
-            ]
-        )
-    except IndexError:
-        pass
-
-    await message.reply(
-        text = FORCE_MSG.format(
-                first = message.from_user.first_name,
-                last = message.from_user.last_name,
-                username = None if not message.from_user.username else '@' + message.from_user.username,
-                mention = message.from_user.mention,
-                id = message.from_user.id
+                "Join Channel 1",
+                url="channel1_invite_link"
             ),
-        reply_markup = InlineKeyboardMarkup(buttons),
-        quote = True,
-        disable_web_page_preview = True
-    )
+            InlineKeyboardButton(
+                "Join Channel 2",
+                url="channel2_invite_link"
+            )
+        ]
+        await message.reply(
+            text="Please join the required channels to proceed.",
+            reply_markup=InlineKeyboardMarkup([buttons]),
+            quote=True,
+            disable_web_page_preview=True
+        )
+    else:
+        await message.reply_text("You are a member of all required channels. Welcome!")
 
+        await message.reply(
+            text=<link>FORCE_MSG</link>.format(
+                first=<link>message.from_user.first_name</link>,
+                last=<link>message.from_user.last_name</link>,
+                username=None if not message.from_user.username else '@' + message.from_user.username,
+                mention=<link>message.from_user.mention</link>,
+                id=<link>message.from_user.id</link>
+            ),
+            reply_markup=InlineKeyboardMarkup(buttons),
+            quote=True,
+            disable_web_page_preview=True
+        )
+        
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
     msg = await client.send_message(chat_id=message.chat.id, text=WAIT_MSG)
@@ -269,8 +292,3 @@ Unsuccessful: <code>{unsuccessful}</code></b>"""
         msg = await message.reply(REPLY_ERROR)
         await asyncio.sleep(8)
         await msg.delete()
-
-@Bot.on_message(filters.command('restart') & filters.private & filters.user(ADMINS))
-async def restart_text(client: Bot, message: Message):
-    await bot.send_message(message.chat.id, "Restarting...")
-    os.system("heroku restart -a filestoretitantestindia")
