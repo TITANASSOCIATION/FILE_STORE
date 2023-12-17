@@ -179,9 +179,14 @@ async def help_command(client: Client, message: Message):
             )
     )
 
+
+channel1_invite_link = "your_channel1_invite_link"
+channel2_invite_link = "your_channel2_invite_link"
+
+# Your list of channel IDs
 channel_ids = ["-1001919036915", "-1002093073712"]
 
-Function to check if the user is a member of a channel
+# Function to check if the user is a member of a channel
 async def is_user_member(client, user_id, channel_id):
     try:
         member = await client.get_chat_member(channel_id, user_id)
@@ -190,7 +195,7 @@ async def is_user_member(client, user_id, channel_id):
         print(e)
         return False
 
-Check if the user is a member of all the channels
+# Check if the user is a member of all the channels
 async def check_channel_membership(client, user_id):
     for channel_id in channel_ids:
         is_member = await is_user_member(client, user_id, channel_id)
@@ -198,24 +203,27 @@ async def check_channel_membership(client, user_id):
             return False
     return True
 
+
+
 @Bot.on_message(filters.command('start') & filters.private)
-async def not_joined(client: Client, message: Message):
+async def not_joined(message: types.Message):
+    
     if message.from_user.id in BANNED_USERS:
         await message.reply_text("Sorry, you are banned.")
         return
 
     user_id = message.from_user.id
-    is_member_of_all_channels = await check_channel_membership(client, user_id)
+    is_member_of_all_channels = await check_channel_membership(bot, user_id)
 
     if not is_member_of_all_channels:
         buttons = [
             InlineKeyboardButton(
                 "Join Channel 1",
-                url="channel1_invite_link"
+                url=channel1_invite_link
             ),
             InlineKeyboardButton(
                 "Join Channel 2",
-                url="channel2_invite_link"
+                url=channel2_invite_link
             )
         ]
         await message.reply(
@@ -225,20 +233,18 @@ async def not_joined(client: Client, message: Message):
             disable_web_page_preview=True
         )
     else:
-        await message.reply_text("You are a member of all required channels. Welcome!")
-
-        await message.reply(
-            text=<link>FORCE_MSG</link>.format(
-                first=<link>message.from_user.first_name</link>,
-                last=<link>message.from_user.last_name</link>,
-                username=None if not message.from_user.username else '@' + message.from_user.username,
-                mention=<link>message.from_user.mention</link>,
-                id=<link>message.from_user.id</link>
-            ),
-            reply_markup=InlineKeyboardMarkup(buttons),
-            quote=True,
-            disable_web_page_preview=True
+        # Replace <link> with actual formatting tags
+        welcome_message = (
+            "You are a member of all required channels. Welcome!\n\n"
+            f"FORCE_MSG: first={message.from_user.first_name}, "
+            f"last={message.from_user.last_name}, "
+            f"username={'@' + message.from_user.username if message.from_user.username else None}, "
+            f"mention={message.from_user.mention}, "
+            f"id={message.from_user.id}"
         )
+        
+        await message.reply_text(welcome_message, reply_markup=InlineKeyboardMarkup(buttons), quote=True, disable_web_page_preview=True)
+
         
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
