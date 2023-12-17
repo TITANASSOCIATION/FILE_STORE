@@ -198,8 +198,7 @@ async def not_joined(bot, message):
             text = "bruh join the channel",
             reply_markup=InlineKeyboardMarkup([[
                 InlineKeyboardButton(updates channel, url="https://t.me/{force_channel}"
-                ]]
-               )
+                                     ]])
         )
     
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
