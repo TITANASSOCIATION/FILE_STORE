@@ -181,7 +181,7 @@ async def help_command(client: Client, message: Message):
             )
     )
 
-force_channel = {Titan_Association}
+force_channel = "-1001919036915"
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(bot, message):
