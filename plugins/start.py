@@ -1,6 +1,7 @@
 import os
 import random
 import asyncio
+from aiogram import types as aiogram_types
 from pyrogram import Client, filters, __version__
 from pyrogram.enums import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
@@ -206,7 +207,7 @@ async def check_channel_membership(client, user_id):
 
 
 @Bot.on_message(filters.command('start') & filters.private)
-async def not_joined(message: types.Message):
+async def not_joined(message: aiogram_types.Message):
     
     if message.from_user.id in BANNED_USERS:
         await message.reply_text("Sorry, you are banned.")
